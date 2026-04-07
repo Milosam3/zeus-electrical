@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zeus Electrical — Lead Generation & Operations System
 
-## Getting Started
+A full-stack prototype for Zeus Electrical Pty Ltd, a Johannesburg electrician business.
+Built with Next.js 14 (App Router), Tailwind CSS, and Shadcn/UI.
 
-First, run the development server:
+## Features
+
+| Route | Description |
+|-------|-------------|
+| `/` | Public website — hero, services, reviews, quote form |
+| `/demo/whatsapp-bot` | AI WhatsApp intake bot simulator |
+| `/demo/quote-bot` | AI auto-quote generator with PDF download |
+| `/dashboard` | Owner ops dashboard with leads, job board & missed calls |
+
+## Setup
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Add your Anthropic API key
+
+Edit `.env.local` and replace the placeholder:
+
+```env
+ANTHROPIC_API_KEY=sk-ant-...your-key-here...
+```
+
+Get a key at: https://console.anthropic.com/
+
+### 3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Anthropic API Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app calls the Anthropic API (`claude-sonnet-4-20250514`) in 3 places:
 
-## Learn More
+1. **WhatsApp Bot** (`/api/whatsapp-chat`) — powers natural conversation, extracts structured lead data
+2. **Quote Generator** (`/api/quote`) — generates professional electrical quote estimates
+3. **Callback Scripts** (`/api/callback-script`) — writes personalised callback scripts for missed calls
 
-To learn more about Next.js, take a look at the following resources:
+All API calls have fallback UI — the app degrades gracefully if the API is unavailable.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Brand
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Company:** Zeus Electrical Pty Ltd
+- **Owner:** Shaldon
+- **Phone:** +27 60 790 2941
+- **Area:** Roodepoort / Johannesburg West / Bryanston
+- **Colours:** Deep blue `#0C2340` + Electric yellow `#F5C518`
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS v3
+- Shadcn/UI (Radix-based components)
+- Anthropic SDK (`@anthropic-ai/sdk`)
+- next-themes (dark/light mode)
+- lucide-react icons
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx                    # Public website
+    layout.tsx                  # Root layout with ThemeProvider + Navbar
+    globals.css                 # Global styles + CSS variables
+    api/
+      whatsapp-chat/route.ts    # WhatsApp bot AI endpoint
+      quote/route.ts            # Quote generation AI endpoint
+      callback-script/route.ts  # Callback script AI endpoint
+    demo/
+      whatsapp-bot/page.tsx     # WhatsApp bot simulator UI
+      quote-bot/page.tsx        # Quote generator UI
+    dashboard/page.tsx          # Owner ops dashboard
+  components/
+    navbar.tsx                  # Navigation with dark mode toggle
+    theme-provider.tsx          # next-themes provider
+    ui/                         # Shadcn UI components (Radix-based)
+```
+
+## Notes
+
+- No database required — mock data used for the prototype
+- Mobile-first responsive design throughout
+- Dark/light mode toggle in the navbar
+- WhatsApp FAB button pinned bottom-right on the public site
