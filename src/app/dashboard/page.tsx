@@ -167,9 +167,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 py-6">
+      <div className="mx-auto max-w-7xl px-3 sm:px-8 py-4 sm:py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-6">
+          <TabsList className="mb-4 sm:mb-6 w-full sm:w-auto">
             <TabsTrigger value="overview">Leads</TabsTrigger>
             <TabsTrigger value="board">Job Board</TabsTrigger>
             <TabsTrigger value="missed">
@@ -191,34 +191,47 @@ export default function DashboardPage() {
               <CardContent className="p-0">
                 <div className="divide-y">
                   {leads.map((lead) => (
-                    <div key={lead.id} className="px-6 py-4 flex items-center gap-4 hover:bg-muted/20 transition-colors">
-                      <div
-                        className={`h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          lead.urgency === "emergency" ? "bg-red-100 dark:bg-red-900/30" : "bg-blue-100 dark:bg-blue-900/30"
-                        }`}
-                      >
-                        {lead.urgency === "emergency" ? (
-                          <AlertTriangle className="h-5 w-5 text-red-600" />
-                        ) : (
-                          <Calendar className="h-5 w-5 text-blue-600" />
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-semibold text-sm">{lead.name}</span>
-                          {lead.urgency === "emergency" && (
-                            <Badge variant="destructive" className="text-xs px-1.5 py-0">EMERGENCY</Badge>
+                    <div key={lead.id} className="px-3 sm:px-6 py-3 hover:bg-muted/20 transition-colors">
+                      {/* Top row: icon + name/badge + time + call button */}
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            lead.urgency === "emergency" ? "bg-red-100 dark:bg-red-900/30" : "bg-blue-100 dark:bg-blue-900/30"
+                          }`}
+                        >
+                          {lead.urgency === "emergency" ? (
+                            <AlertTriangle className="h-4 w-4 text-red-600" />
+                          ) : (
+                            <Calendar className="h-4 w-4 text-blue-600" />
                           )}
                         </div>
-                        <div className="text-xs text-muted-foreground mt-0.5">
-                          {lead.jobType} · {lead.area} · {lead.phone}
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="font-semibold text-sm truncate">{lead.name}</span>
+                            {lead.urgency === "emergency" && (
+                              <Badge variant="destructive" className="text-[10px] px-1.5 py-0 flex-shrink-0">EMERGENCY</Badge>
+                            )}
+                          </div>
+                          <div className="text-xs text-muted-foreground truncate">
+                            {lead.jobType} · {lead.area}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <span className="text-xs text-muted-foreground hidden sm:block mr-1">{lead.timestamp}</span>
+                          <a href={`tel:${lead.phone.replace(/\s/g, "")}`}>
+                            <Button size="icon" variant="ghost" className="h-8 w-8">
+                              <Phone className="h-4 w-4" />
+                            </Button>
+                          </a>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 flex-shrink-0">
-                        <span className="text-xs text-muted-foreground hidden sm:block">{lead.timestamp}</span>
-                        <div className="flex gap-1.5 flex-wrap justify-end">
+                      {/* Bottom row: phone + status pills */}
+                      <div className="flex items-center gap-2 mt-2 pl-11 flex-wrap">
+                        <span className="text-xs text-muted-foreground mr-auto">{lead.phone}</span>
+                        <div className="flex gap-1 flex-wrap">
                           {JOB_STATUSES.map((s) => (
                             <button
                               key={s}
@@ -233,11 +246,6 @@ export default function DashboardPage() {
                             </button>
                           ))}
                         </div>
-                        <a href={`tel:${lead.phone.replace(/\s/g, "")}`}>
-                          <Button size="icon" variant="ghost" className="h-8 w-8">
-                            <Phone className="h-4 w-4" />
-                          </Button>
-                        </a>
                       </div>
                     </div>
                   ))}
@@ -310,15 +318,17 @@ export default function DashboardPage() {
                 missedCalls.map((call) => (
                   <Card key={call.id} className="overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="flex items-center gap-4 p-4 border-b">
-                        <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
-                          <PhoneMissed className="h-5 w-5 text-red-500" />
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 border-b">
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className="h-9 w-9 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                            <PhoneMissed className="h-4 w-4 text-red-500" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="font-semibold text-sm">{call.callerName}</div>
+                            <div className="text-xs text-muted-foreground truncate">{call.callerNumber} · {call.callTime}</div>
+                          </div>
                         </div>
-                        <div className="flex-1">
-                          <div className="font-semibold text-sm">{call.callerName}</div>
-                          <div className="text-xs text-muted-foreground">{call.callerNumber} · {call.callTime}</div>
-                        </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-shrink-0">
                           <a href={`tel:${call.callerNumber.replace(/\s/g, "")}`}>
                             <Button size="sm" variant="outline" className="gap-1.5">
                               <Phone className="h-3.5 w-3.5" />

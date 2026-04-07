@@ -150,7 +150,7 @@ export default function Home() {
                 </Button>
               </a>
               <a href="#quote">
-                <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 text-base w-full sm:w-auto">
+                <Button size="lg" className="bg-white text-[#0C2340] hover:bg-white/90 font-bold text-base w-full sm:w-auto">
                   Request a Free Quote
                 </Button>
               </a>
