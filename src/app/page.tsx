@@ -110,14 +110,20 @@ export default function Home() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 800));
+    const msg = [
+      `Hi Zeus Electrical! I'd like to request a quote.`,
+      ``,
+      `Name: ${formData.name}`,
+      `Phone: ${formData.phone}`,
+      `Area: ${formData.area}`,
+      `Job Type: ${formData.jobType}`,
+      formData.message ? `Details: ${formData.message}` : null,
+    ].filter(Boolean).join('\n');
+    window.open(`https://wa.me/27607902941?text=${encodeURIComponent(msg)}`, '_blank');
     setSubmitted(true);
-    setSubmitting(false);
   };
 
   return (
@@ -294,7 +300,7 @@ export default function Home() {
                 <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold mb-2">Quote Request Received!</h3>
                 <p className="text-muted-foreground mb-6">
-                  Thanks {formData.name}! Shaldon will contact you on {formData.phone} within 2 hours.
+                  WhatsApp has opened with your details pre-filled. Just hit send — Shaldon will get back to you shortly.
                 </p>
                 <Button onClick={() => { setSubmitted(false); setFormData({ name: "", phone: "", area: "", jobType: "", message: "" }); }}>
                   Submit Another Request
@@ -370,9 +376,8 @@ export default function Home() {
                     type="submit"
                     size="lg"
                     className="w-full bg-[#0C2340] hover:bg-[#0C2340]/90 dark:bg-[#F5C518] dark:text-[#0C2340] dark:hover:bg-[#F5C518]/90"
-                    disabled={submitting}
                   >
-                    {submitting ? "Sending..." : "Request Free Quote"}
+                    Request Free Quote via WhatsApp
                   </Button>
 
                   <p className="text-center text-xs text-muted-foreground">
@@ -414,7 +419,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  Roodepoort, Johannesburg
+                  20 Tielman Roos Ave, Florida Park, Roodepoort, 1709
                 </div>
               </div>
             </div>
