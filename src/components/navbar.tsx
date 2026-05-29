@@ -13,7 +13,7 @@ export function Navbar() {
   const links = [
     { href: "/", label: "Home" },
     { href: "/#services", label: "Services" },
-    { href: "/#quote", label: "Get a Quote" },
+    { href: "/#contact", label: "Get a Quote" },
     { href: "/dashboard", label: "Dashboard" },
   ];
 
@@ -42,12 +42,6 @@ export function Navbar() {
               className="text-sm text-white/80 hover:text-[#F5C518] transition-colors"
             >
               WhatsApp Bot
-            </Link>
-            <Link
-              href="/demo/quote-bot"
-              className="text-sm text-white/80 hover:text-[#F5C518] transition-colors"
-            >
-              Quote Bot
             </Link>
             <Button
               variant="ghost"
@@ -98,7 +92,6 @@ export function Navbar() {
             </Link>
           ))}
           <Link href="/demo/whatsapp-bot" onClick={() => setOpen(false)} className="block text-sm text-white/80 hover:text-[#F5C518]">WhatsApp Bot Demo</Link>
-          <Link href="/demo/quote-bot" onClick={() => setOpen(false)} className="block text-sm text-white/80 hover:text-[#F5C518]">Quote Bot Demo</Link>
         </div>
       )}
     </nav>
