@@ -10,13 +10,25 @@ export const config = {
     area: "Joburg West & Surrounds",
     ownerName: "Shaldon",
   },
+  theme: {
+    primary: "#0C2340",
+    accent: "#F5C518",
+  },
   hero: {
     headline: "Johannesburg's Trusted Electricians",
     accentLine: "Available 24/7",
     subheadline:
       "Powering homes & businesses across Johannesburg. From emergency callouts to full solar installations — done right, done safely.",
   },
+  trustBadges: [
+    "Registered & Insured",
+    "24/7 Emergency Response",
+    "COC Certified",
+  ],
   whatsappMessage: "Hi Zeus Electrical! I'd like to request a quote.",
+  servicesSubtitle: "Full-service electrical contracting for residential and commercial clients across Johannesburg.",
+  reviewsSubtitle: "Real reviews from Google — Johannesburg's most trusted electricians",
+  areasSubtitle: "Covering all of Johannesburg West and surrounding suburbs",
   services: [
     {
       title: "Fault Finding",

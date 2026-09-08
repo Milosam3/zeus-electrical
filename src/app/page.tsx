@@ -16,28 +16,39 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "Distribution Boards": <Zap className="h-8 w-8" />,
   "Emergency Callouts": <Phone className="h-8 w-8" />,
   "General Electrical": <Shield className="h-8 w-8" />,
+  "Electrical Repairs & Installations": <Zap className="h-8 w-8" />,
+  "Fibre & Network Solutions": <Shield className="h-8 w-8" />,
+  "Handyman Services": <Award className="h-8 w-8" />,
+  "Painting": <Shield className="h-8 w-8" />,
+  "Free Quotes": <CheckCircle className="h-8 w-8" />,
 }
+
+const BADGE_ICONS = [
+  <CheckCircle key="0" className="h-4 w-4" style={{ color: "var(--brand-accent)" }} />,
+  <Clock key="1" className="h-4 w-4" style={{ color: "var(--brand-accent)" }} />,
+  <Award key="2" className="h-4 w-4" style={{ color: "var(--brand-accent)" }} />,
+]
 
 export default function Home() {
   return (
     <main className="relative">
 
       {/* Hero */}
-      <section className="relative bg-[#0C2340] text-white overflow-hidden">
+      <section className="relative text-white overflow-hidden" style={{ backgroundColor: "var(--brand-primary)" }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: "radial-gradient(circle at 20% 50%, #F5C518 0%, transparent 50%), radial-gradient(circle at 80% 20%, #F5C518 0%, transparent 40%)"
+            backgroundImage: `radial-gradient(circle at 20% 50%, var(--brand-accent) 0%, transparent 50%), radial-gradient(circle at 80% 20%, var(--brand-accent) 0%, transparent 40%)`
           }} />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <Zap className="h-6 w-6 text-[#F5C518]" />
-              <span className="text-[#F5C518] font-semibold text-sm uppercase tracking-wider">{config.business.legalName}</span>
+              <Zap className="h-6 w-6" style={{ color: "var(--brand-accent)" }} />
+              <span className="font-semibold text-sm uppercase tracking-wider" style={{ color: "var(--brand-accent)" }}>{config.business.legalName}</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               {config.hero.headline}
-              <span className="block text-[#F5C518]">{config.hero.accentLine}</span>
+              <span className="block" style={{ color: "var(--brand-accent)" }}>{config.hero.accentLine}</span>
             </h1>
             <p className="text-xl text-white/80 mb-8 max-w-2xl">
               {config.hero.subheadline}
@@ -50,24 +61,22 @@ export default function Home() {
                 </Button>
               </a>
               <a href={`tel:${config.business.phone}`}>
-                <Button size="lg" className="bg-white text-[#0C2340] hover:bg-white/90 font-bold text-base w-full sm:w-auto gap-2">
+                <Button size="lg" className="bg-white hover:bg-white/90 font-bold text-base w-full sm:w-auto gap-2" style={{ color: "var(--brand-primary)" }}>
                   <Phone className="h-5 w-5" />
                   Call Now: {config.business.phoneDisplay}
                 </Button>
               </a>
             </div>
             <div className="flex flex-wrap gap-6 mt-10 text-sm text-white/70">
+              {config.trustBadges.map((badge, i) => (
+                <div key={badge} className="flex items-center gap-2">
+                  {BADGE_ICONS[i]}
+                  {badge}
+                </div>
+              ))}
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-[#F5C518]" /> Registered & Insured
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-[#F5C518]" /> 24/7 Emergency Response
-              </div>
-              <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-[#F5C518]" /> COC Certified
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#F5C518]" /> {config.business.area}
+                <MapPin className="h-4 w-4" style={{ color: "var(--brand-accent)" }} />
+                {config.business.area}
               </div>
             </div>
           </div>
@@ -79,15 +88,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Full-service electrical contracting for residential and commercial clients across Johannesburg.
-            </p>
+            <p className="text-muted-foreground max-w-xl mx-auto">{config.servicesSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {config.services.map((s) => (
-              <Card key={s.title} className="group hover:shadow-lg transition-shadow border-l-4 border-l-[#F5C518]">
+              <Card key={s.title} className="group hover:shadow-lg transition-shadow border-l-4" style={{ borderLeftColor: "var(--brand-accent)" }}>
                 <CardContent className="p-6">
-                  <div className="text-[#0C2340] dark:text-[#F5C518] mb-4 group-hover:scale-110 transition-transform inline-block">
+                  <div className="mb-4 group-hover:scale-110 transition-transform inline-block" style={{ color: "var(--brand-accent)" }}>
                     {SERVICE_ICONS[s.title] ?? <Zap className="h-8 w-8" />}
                   </div>
                   <h3 className="font-bold text-lg mb-2">{s.title}</h3>
@@ -97,7 +104,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Fiksr demo cards — shown to prospect to demonstrate the platform */}
+          {/* Fiksr demo cards */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <Link href="/demo/whatsapp-bot">
               <Card className="group cursor-pointer hover:shadow-lg transition-all border-2 border-green-500/30 hover:border-green-500">
@@ -113,10 +120,10 @@ export default function Home() {
               </Card>
             </Link>
             <Link href="/dashboard">
-              <Card className="group cursor-pointer hover:shadow-lg transition-all border-2 border-[#F5C518]/30 hover:border-[#F5C518]">
+              <Card className="group cursor-pointer hover:shadow-lg transition-all border-2" style={{ borderColor: `color-mix(in srgb, var(--brand-accent) 30%, transparent)` }}>
                 <CardContent className="p-6 flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[#F5C518] flex items-center justify-center flex-shrink-0">
-                    <Zap className="h-6 w-6 text-[#0C2340]" />
+                  <div className="h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "var(--brand-accent)" }}>
+                    <Zap className="h-6 w-6" style={{ color: "var(--brand-primary)" }} />
                   </div>
                   <div>
                     <div className="font-bold">Owner Dashboard</div>
@@ -130,24 +137,24 @@ export default function Home() {
       </section>
 
       {/* Reviews */}
-      <section className="py-20 bg-[#0C2340] text-white">
+      <section className="py-20 text-white" style={{ backgroundColor: "var(--brand-primary)" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-1 mb-3">
-              {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-5 w-5 fill-[#F5C518] text-[#F5C518]" />)}
+              {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-5 w-5" style={{ fill: "var(--brand-accent)", color: "var(--brand-accent)" }} />)}
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">What Our Customers Say</h2>
-            <p className="text-white/60">Real reviews from Google — Johannesburg&apos;s most trusted electricians</p>
+            <p className="text-white/60">{config.reviewsSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {config.reviews.map((r) => (
               <div key={r.name} className="bg-white/10 rounded-xl p-6 border border-white/10 backdrop-blur-sm">
                 <div className="flex items-center gap-1 mb-3">
-                  {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-[#F5C518] text-[#F5C518]" />)}
+                  {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4" style={{ fill: "var(--brand-accent)", color: "var(--brand-accent)" }} />)}
                 </div>
                 <p className="text-white/90 text-sm leading-relaxed mb-4">&ldquo;{r.text}&rdquo;</p>
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[#F5C518]">{r.name}</span>
+                  <span className="font-semibold" style={{ color: "var(--brand-accent)" }}>{r.name}</span>
                   <span className="text-white/40 text-xs">{r.date}</span>
                 </div>
               </div>
@@ -161,12 +168,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Areas We Serve</h2>
-            <p className="text-muted-foreground">Covering all of Johannesburg West and surrounding suburbs</p>
+            <p className="text-muted-foreground">{config.areasSubtitle}</p>
           </div>
           <div className="flex flex-wrap gap-3 justify-center">
             {config.areas.map((a) => (
               <div key={a} className="flex items-center gap-2 bg-card border rounded-full px-4 py-2 text-sm font-medium">
-                <MapPin className="h-3 w-3 text-[#F5C518]" />
+                <MapPin className="h-3 w-3" style={{ color: "var(--brand-accent)" }} />
                 {a}
               </div>
             ))}
@@ -197,18 +204,18 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0C2340] text-white py-12">
+      <footer className="text-white py-12" style={{ backgroundColor: "var(--brand-primary)" }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Zap className="h-6 w-6 text-[#F5C518]" />
+                <Zap className="h-6 w-6" style={{ color: "var(--brand-accent)" }} />
                 <span className="font-bold text-lg">{config.business.legalName}</span>
               </div>
               <p className="text-white/60 text-sm">{config.business.tagline}</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-3 text-[#F5C518]">Contact</h4>
+              <h4 className="font-semibold mb-3" style={{ color: "var(--brand-accent)" }}>Contact</h4>
               <div className="space-y-2 text-sm text-white/70">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
@@ -225,7 +232,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h4 className="font-semibold mb-3 text-[#F5C518]">Powered by</h4>
+              <h4 className="font-semibold mb-3" style={{ color: "var(--brand-accent)" }}>Powered by</h4>
               <div className="space-y-2 text-sm text-white/70">
                 <div><a href="/demo/whatsapp-bot" className="hover:text-white">WhatsApp Bot Demo</a></div>
                 <div><a href="/dashboard" className="hover:text-white">Owner Dashboard</a></div>

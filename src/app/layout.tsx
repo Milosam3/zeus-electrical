@@ -3,12 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { config } from "@/client.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Zeus Electrical Pty Ltd — Johannesburg Electricians",
-  description: "Powering homes & businesses across Johannesburg. Available 24/7 for fault finding, solar installation, COC certificates and more.",
+  title: `${config.business.legalName} — ${config.business.area}`,
+  description: config.business.tagline,
 };
 
 export default function RootLayout({
@@ -18,6 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <style>{`
+          :root {
+            --brand-primary: ${config.theme.primary};
+            --brand-accent: ${config.theme.accent};
+          }
+        `}</style>
+      </head>
       <body className={`${inter.className} antialiased min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />
