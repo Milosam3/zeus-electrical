@@ -234,8 +234,6 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-3" style={{ color: "var(--brand-accent)" }}>Powered by</h4>
               <div className="space-y-2 text-sm text-white/70">
-                <div><a href="/demo/whatsapp-bot" className="hover:text-white">WhatsApp Bot Demo</a></div>
-                <div><a href="/dashboard" className="hover:text-white">Owner Dashboard</a></div>
                 <div><a href="https://fiksr.co.za" target="_blank" rel="noopener noreferrer" className="hover:text-white">Fiksr</a></div>
               </div>
             </div>

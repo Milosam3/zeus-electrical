@@ -15,7 +15,6 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/#services", label: "Services" },
     { href: "/#contact", label: "Get a Quote" },
-    { href: "/dashboard", label: "Dashboard" },
   ];
 
   return (
@@ -38,9 +37,6 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link href="/demo/whatsapp-bot" className="text-sm text-white/80 transition-colors hover:text-white">
-              WhatsApp Bot
-            </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -89,9 +85,6 @@ export function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link href="/demo/whatsapp-bot" onClick={() => setOpen(false)} className="block text-sm text-white/80 hover:text-white">
-            WhatsApp Bot Demo
-          </Link>
         </div>
       )}
     </nav>
