@@ -4,7 +4,6 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
 import { config } from "@/client.config"
 
 const waLink = `https://wa.me/${config.business.whatsapp}?text=${encodeURIComponent(config.whatsappMessage)}`
@@ -102,36 +101,6 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          {/* Fiksr demo cards */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
-            <Link href="/demo/whatsapp-bot">
-              <Card className="group cursor-pointer hover:shadow-lg transition-all border-2 border-green-500/30 hover:border-green-500">
-                <CardContent className="p-6 flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold">WhatsApp Bot Demo</div>
-                    <div className="text-sm text-muted-foreground">AI-powered intake assistant</div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/dashboard">
-              <Card className="group cursor-pointer hover:shadow-lg transition-all border-2" style={{ borderColor: `color-mix(in srgb, var(--brand-accent) 30%, transparent)` }}>
-                <CardContent className="p-6 flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "var(--brand-accent)" }}>
-                    <Zap className="h-6 w-6" style={{ color: "var(--brand-primary)" }} />
-                  </div>
-                  <div>
-                    <div className="font-bold">Owner Dashboard</div>
-                    <div className="text-sm text-muted-foreground">Manage leads & missed calls</div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
           </div>
         </div>
       </section>
